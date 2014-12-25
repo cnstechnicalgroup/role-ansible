@@ -1,0 +1,20 @@
+---
+- name: Install boto
+  apt: pkg={{ item }} state=latest update_cache=true
+  with_items:
+    - python-pip
+ 
+- name: Install boto
+  pip: name=boto state=latest
+
+- name: Use custom ansible.cfg
+  template: src=ansible.cfg.j2 dest=/home/{{item}}/.ansible.cfg
+  with_items: admin_users
+
+# Confirm / create $HOME/bin directory
+- file: path="/home/{{item}}/bin" state=directory mode=0755 owner="{{item}}" group="{{item}}"
+  with_items: admin_users
+
+- name: Install updateansible script for local users
+  copy: src="bin/updateansible" dest="/home/{{item}}/bin/updateansible" mode=0755 owner="{{item}}" group="{{item}}"
+  with_items: admin_users
