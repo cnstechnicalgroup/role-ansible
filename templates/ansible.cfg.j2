@@ -49,7 +49,7 @@ timeout = 10
 
 # default user to use for playbooks if user is not specified
 # (/usr/bin/ansible will use current user as default)
-remote_user = "{{ ansible_user }}"
+remote_user = {{ ansible_user }}
 
 # logging is off by default unless this path is defined
 # if so defined, consider logrotate
@@ -73,7 +73,7 @@ remote_user = "{{ ansible_user }}"
 
 # if set, always use this private key file for authentication, same as 
 # if passing --private-key to ansible or ansible-playbook
-private_key_file = "{{ ansible_ssh_key }}"
+private_key_file = {{ ansible_ssh_key }}
 
 # format of string {{ ansible_managed }} available within Jinja2 
 # templates indicates to users editing templates files will be replaced.
