@@ -25,6 +25,15 @@ Dependencies
 
 This package has no dependencies.
 
+Usage
+-----
+
+After applying role a new script, `updateansible`, will be available for all users. This script makes it easy to update a user's local ansible installation to a specific version:
+
+```bash
+updateansible -V v2.0.0-0.8.rc3
+```
+
 License
 -------
 

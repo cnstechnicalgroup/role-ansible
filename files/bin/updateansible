@@ -1,3 +1,44 @@
 #!/bin/bash
 
-cd ~/local/ansible && git pull --rebase && git submodule update --init --recursive
+#############
+# Functions #
+#############
+
+usage()
+{
+cat << EOF
+usage: $0 options
+
+Update Ansible to a specified version
+
+OPTIONS:
+   -h      Show this message
+   -V      Target Ansible version
+   -v      Verbose output
+
+EOF
+}
+
+while getopts “h:V:v” OPTION
+do
+     case $OPTION in
+         h)
+             usage
+             exit 1
+             ;;
+         V)
+             VERSION=$OPTARG
+             ;;
+         v)
+             VERBOSE=1
+             ;;
+     esac
+done
+
+if [[ -z $VERSION ]]
+then
+     usage
+     exit 1
+fi
+
+cd ~/local/ansible && git pull origin stable-2.0 && git checkout $VERSION && git submodule update --init --recursive
